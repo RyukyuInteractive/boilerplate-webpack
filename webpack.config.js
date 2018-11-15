@@ -1,23 +1,26 @@
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
-  mode: 'development',
-  entry: { fruits: './src/fruits.js', vegetables: './src/vegetables.ts' },
+  entry: ["./src/main.ts", "./src/main.scss"],
+  mode: "development",
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: { presets: ['@babel/preset-env'] }
-        }
+        use: { loader: "babel-loader" }
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use: ["css-loader", "postcss-loader", "sass-loader"]
+        })
       },
       {
         test: /\.ts$/,
-        use: {
-          loader: 'babel-loader',
-          options: { presets: ['@babel/preset-env', '@babel/typescript'] }
-        }
+        use: { loader: "babel-loader" }
       }
     ]
   },
-  resolve: { extensions: ['.ts'] }
+  plugins: [new ExtractTextPlugin("styles.css")],
+  resolve: { extensions: [".js", ".scss", ".sass", ".ts"] }
 };
