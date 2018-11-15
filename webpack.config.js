@@ -12,12 +12,6 @@ module.exports = {
           use: ["css-loader", "postcss-loader", "sass-loader"]
         })
       },
-      {
-        test: /\.handlebars$/,
-        use: ExtractTextPlugin.extract({
-          use: { loader: "handlebars-loader" }
-        })
-      },
       { test: /\.ts$/, use: { loader: "babel-loader" } }
     ]
   },
