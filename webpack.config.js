@@ -5,10 +5,7 @@ module.exports = {
   mode: "development",
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        use: { loader: "babel-loader" }
-      },
+      { test: /\.js$/, use: { loader: "babel-loader" } },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
@@ -16,9 +13,12 @@ module.exports = {
         })
       },
       {
-        test: /\.ts$/,
-        use: { loader: "babel-loader" }
-      }
+        test: /\.handlebars$/,
+        use: ExtractTextPlugin.extract({
+          use: { loader: "handlebars-loader" }
+        })
+      },
+      { test: /\.ts$/, use: { loader: "babel-loader" } }
     ]
   },
   plugins: [new ExtractTextPlugin("styles.css")],
